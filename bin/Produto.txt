@@ -1,0 +1,2 @@
+1;Ferro;FerroDePassarRoupas;false;
+2;Camisa branca;Uma camisa branca comum.;true;2;

@@ -1,0 +1,2 @@
+1;Rua Qualquer, 34, Varssovia-CT;true;0;0;
+2;Rua Fechada, 30, Passo Fundo-MC;true;0;0;
