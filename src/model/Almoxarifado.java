@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import helper.DateHelper;
+
 public class Almoxarifado {
 	
 	private boolean lockEntrada;
@@ -25,6 +27,18 @@ public class Almoxarifado {
 		
 		this.ultimaDataDeEntrada = new Date(000000000);
 		this.ultimaDataDeSaida = new Date(000000000);
+		
+	}
+	
+	public Almoxarifado(int codigo, String localizacao, Date entrada, Date saida) {
+		this.localizacao = localizacao;
+		this.codigoID = codigo;
+		this.produtos = new ArrayList<Produto>();
+		this.quantidades = new ArrayList<Integer>();
+		this.status = true;
+		
+		this.ultimaDataDeEntrada = entrada;
+		this.ultimaDataDeSaida = saida;
 		
 	}
 
@@ -111,7 +125,7 @@ public class Almoxarifado {
 			throw new Exception("Quantidade Inválida!!");
 		}
 		
-		if(!this.produtos.contains(produto)){
+		if(this.produtos.contains(produto) == false){
 			if(quantidade<0){
 				throw new Exception("Produto não encontrado!!");
 			}else{
@@ -123,21 +137,31 @@ public class Almoxarifado {
 			}
 		}else {
 			
+			int index = this.produtos.indexOf(produto);
+			
 			if(quantidade>0){
 				if(isLockEntrada()) {
 					throw new Exception("Almoxarifado Travado para entrada!!");
 				}
 				this.setUltimaDataDeEntrada(new Date(System.currentTimeMillis()));
+				quantidade+= this.quantidades.get(index);
 				this.setLockEntrada(true);
+				this.quantidades.set(index, quantidade);
+				
 			}else if(quantidade<0){
 				if(isLockSaida()) {
 					throw new Exception("Almoxarifado travado para Saida!!");
 				}
 				this.setUltimaDataDeSaida(new Date(System.currentTimeMillis()));
+				quantidade+= this.quantidades.get(index);
+				if(quantidade<0) {
+					throw new Exception("Capacidade indispoível!!");
+				}
 				this.setLockSaida(true);
+				this.quantidades.set(index, quantidade);
 			}
 			
-			this.quantidades.set(this.produtos.indexOf(produto), quantidade);
+			
 		}
 		
 		
@@ -153,6 +177,11 @@ public class Almoxarifado {
 		
 		// 1 dia = 86400000 milisegundos (24 * 60 * 60 * 1000).
 		long dias = (new Date(System.currentTimeMillis()).getTime() - this.getUltimaDataDeEntrada().getTime()) / 86400000L;
+		
+		//==========================================================================================================================================================
+//		System.err.println(DateHelper.getDataFormated(new Date(System.currentTimeMillis()))+"\t"
+//				+ ""+DateHelper.getDataFormated(this.getUltimaDataDeEntrada())+"\t"+dias+"\t"+isLockEntrada());
+		
 		if(dias > 0){
 			this.setLockEntrada(false);
 		}
@@ -161,9 +190,28 @@ public class Almoxarifado {
 
 	private void destravarSaida(){
 		long dias = (new Date(System.currentTimeMillis()).getTime() - this.getUltimaDataDeSaida().getTime()) / 86400000L;
+
+		//==========================================================================================================================================================
+//		System.err.println(DateHelper.getDataFormated(new Date(System.currentTimeMillis()))+"\t"
+//				+ ""+DateHelper.getDataFormated(this.getUltimaDataDeSaida())+"\t"+dias+"\t"+isLockSaida());
+		
 		if(dias > 0){
 			this.setLockSaida(false);
 		}
+	}
+	
+	public void verificaTravas() {
+		long diasSaida = (new Date(System.currentTimeMillis()).getTime() - this.getUltimaDataDeSaida().getTime()) / 86400000L;
+		long diasEntrada = (new Date(System.currentTimeMillis()).getTime() - this.getUltimaDataDeEntrada().getTime()) / 86400000L;
+		
+		if(diasSaida<=0) {
+			this.setLockSaida(true);
+		}
+		
+		if(diasEntrada<=0) {
+			this.setLockEntrada(true);
+		}
+		
 	}
 	
 	@Override
@@ -176,6 +224,18 @@ public class Almoxarifado {
 				+ status+separador
 				+ ultimaDataDeSaida.getTime()+separador
 				+ ultimaDataDeEntrada.getTime()+separador;
+		
+		return texto;
+	}
+	
+	public String show() {
+		String texto ="";
+		
+		texto+= "Código: "+codigoID+"\n"
+				+"\tLocalização: "+localizacao
+				+"\tStatus: "+status
+				+"\tData última entrada: "+DateHelper.getDataFormated(ultimaDataDeEntrada)
+				+"\tData última saida: "+DateHelper.getDataFormated(ultimaDataDeSaida);
 		
 		return texto;
 	}

@@ -66,10 +66,14 @@ public class TelaMovimentacao {
 		int anoFin = input.nextInt();
 		
 		@SuppressWarnings("deprecation")
-		List<Movimentacao> movimentacoes = prog.movimentacoesSaida(codigoProd, codigoAlmo, new Date(diaFin, mesFin-1, anoFin),  new Date(diaIni, mesIni-1, anoIni));
+		Date dataInicial = new Date(anoFin -1900, mesFin-1, diaFin);
+		@SuppressWarnings("deprecation")
+		Date dataFinal = new Date(anoIni -1900, mesIni-1, diaIni);
+		
+		List<Movimentacao> movimentacoes = prog.movimentacoesSaida(codigoProd, codigoAlmo, dataFinal , dataInicial);
 		
 		for(Movimentacao movi : movimentacoes) {
-			System.out.print(movi.toString()+"\n");
+			System.out.print(movi.show()+"\n");
 		}
 		
 	}
@@ -94,10 +98,14 @@ public class TelaMovimentacao {
 		int anoFin = input.nextInt();
 		
 		@SuppressWarnings("deprecation")
-		List<Movimentacao> movimentacoes = prog.movimentacoesEntrada(codigoProd, codigoAlmo, new Date(diaFin, mesFin-1, anoFin), new Date(diaIni,mesIni-1,anoIni));
+		Date dataInicial = new Date(anoFin -1900, mesFin-1, diaFin);
+		@SuppressWarnings("deprecation")
+		Date dataFinal = new Date(anoIni -1900, mesIni-1, diaIni);
+		
+		List<Movimentacao> movimentacoes = prog.movimentacoesEntrada(codigoProd, codigoAlmo, dataFinal, dataInicial);
 		
 		for(Movimentacao movi : movimentacoes) {
-			System.out.print(movi.toString()+"\n");
+			System.out.print(movi.show()+"\n");
 		}
 		
 	}

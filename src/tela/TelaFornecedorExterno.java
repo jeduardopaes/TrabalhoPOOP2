@@ -56,7 +56,7 @@ public class TelaFornecedorExterno {
 		FornecedorExterno fornecedor = prog.fornecedorBuscar(codigoID);
 		
 		if(fornecedor!= null) {
-			System.out.println(fornecedor.toString());
+			System.out.println(fornecedor.show());
 		}else {
 			System.err.println("Fornecedor não encontrado!!");
 		}

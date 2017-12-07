@@ -2,6 +2,8 @@ package model;
 
 import java.util.Date;
 
+import helper.DateHelper;
+
 public class Movimentacao {
 	
 	private boolean entrada;
@@ -56,6 +58,19 @@ public class Movimentacao {
 		texto+= getData().getTime()+separador;
 		texto+= this.empregado.getMatricula()+separador;
 		
+		
+		return texto;
+	}
+	
+	public String show() {
+		
+		String texto ="";
+		
+		texto+= "Código Produto: " +this.produto.getCodigoID()
+				+ " Código Almoxarifado: "+this.almoxarifado.getCodigoID()
+				+ " Quantidade: "+getQuantidade()
+				+ " Data: "+DateHelper.getDataFormated(getData())
+				+ " Código Empregado: "+this.empregado.getMatricula()+".\n";
 		
 		return texto;
 	}

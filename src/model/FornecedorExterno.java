@@ -34,4 +34,13 @@ public class FornecedorExterno {
 		return texto;
 	}
 	
+	public String show() {
+		String texto = "";
+		
+		texto+= "Código Fornecedor: "+getCodigoID()+"\n"
+				+ "\tNome: "+getNome()+".";
+		
+		return texto;
+	}
+	
 }

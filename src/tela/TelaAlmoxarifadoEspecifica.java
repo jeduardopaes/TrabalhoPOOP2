@@ -18,6 +18,9 @@ public class TelaAlmoxarifadoEspecifica {
 	public TelaAlmoxarifadoEspecifica(ProgramaController programaController, Almoxarifado almoxarifado) {
 		this.prog = programaController;
 		this.almo = almoxarifado;
+		
+		this.almo.verificaTravas();
+		
 	}
 
 	public void menu() {
@@ -59,7 +62,7 @@ public class TelaAlmoxarifadoEspecifica {
 
 	private void listarProdutos() throws Exception {
 		for (Produto prod : almo.getProdutos()) {
-			System.out.println(prod.toString() + almo.getQuantidade(prod) +"\n");
+			System.out.println(prod.show() + "\tQuantidade: "+almo.getQuantidade(prod) +"\n");
 		}
 
 	}
@@ -76,7 +79,7 @@ public class TelaAlmoxarifadoEspecifica {
 		Empregado emp = prog.empregadoBuscar(codigoEmpregado);
 
 		if (produto == null || almo == null || emp == null) {
-			System.out.println(produto.toString() + "\n" + almo.toString() + "\n" + "");
+			System.out.println(produto.show() + "\n" + almo.show() + "\n" + "");
 		}
 
 		try {

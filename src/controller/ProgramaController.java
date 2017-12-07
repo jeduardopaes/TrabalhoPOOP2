@@ -217,9 +217,10 @@ public class ProgramaController {
 	}
 	
 	public String almoxarifadoLista() {
+		salvarAlmoxarifados();
 		String textoLista = "";
 		for(Almoxarifado almo : almoxarifados) {
-			textoLista += almo.toString()+"\n";
+			textoLista += almo.show()+"\n";
 		}
 		
 		return textoLista;
@@ -232,6 +233,7 @@ public class ProgramaController {
 			return false;
 		}else{
 			try {
+				
 				almoxarifado.setQuantidade(produto, quantidade);
 				salvarEstoque();
 			} catch (Exception e) {
@@ -291,7 +293,7 @@ public class ProgramaController {
 		String textoFornecedor = "";
 		
 		for(FornecedorExterno fornecedor : fornecedores) {
-			textoFornecedor += fornecedor.toString()+"\n";
+			textoFornecedor += fornecedor.show()+"\n";
 		}
 		
 		return textoFornecedor;
@@ -331,6 +333,7 @@ public class ProgramaController {
 					&& movimentacao.getCodigoAlmoxarifado() == codigoAlmoxarifado
 					&& movimentacao.getData().getTime() < dataFinal.getTime()
 					&& movimentacao.getData().getTime() > dataInicial.getTime()) {
+				
 				movimentacoesEncontradas.add(movimentacao);
 			}
 		}

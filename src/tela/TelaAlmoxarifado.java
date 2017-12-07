@@ -58,7 +58,7 @@ public class TelaAlmoxarifado {
 		Almoxarifado almo = prog.almoxarifadoBuscar(codigoID);
 		
 		if(almo != null) {
-			System.out.println(almo.toString());
+			System.out.println(almo.show());
 			TelaAlmoxarifadoEspecifica TAE = new TelaAlmoxarifadoEspecifica(prog, almo);
 			TAE.menu();
 		}else {

@@ -42,11 +42,11 @@ public class AlmoxarifadoDAO {
 			
 			
 			almoxarifado = new Almoxarifado(codigoAlmoxarifado,
-							localizacaoAlmoxarifado);
+							localizacaoAlmoxarifado, new Date(dataEntrada), new Date(dataSaida));
 			
 			almoxarifado.setStatus(status);
-			almoxarifado.setUltimaDataDeEntrada(new Date(dataEntrada));
-			almoxarifado.setUltimaDataDeSaida(new Date(dataSaida));
+			//almoxarifado.setUltimaDataDeEntrada(new Date(dataEntrada));
+			//almoxarifado.setUltimaDataDeSaida(new Date(dataSaida));
 					
 			almoxarifados.add(almoxarifado);
 

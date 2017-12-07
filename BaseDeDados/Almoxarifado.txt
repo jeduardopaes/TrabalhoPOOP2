@@ -1,2 +1,2 @@
-1;Rua Qualquer, 34, Varssovia-CT;true;0;0;
-2;Rua Fechada, 30, Passo Fundo-MC;true;0;0;
+1;Rua Qualquer, 34, Varssovia-CT;true;1512494466977;1512494438825;
+2;Rua Fechada, 30, Passo Fundo-MC;true;1512492994829;1512494438826;

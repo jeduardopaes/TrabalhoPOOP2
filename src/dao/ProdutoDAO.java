@@ -32,7 +32,8 @@ public class ProdutoDAO {
 		for(String linha : produtosTexto){
 			String[] linhaQuebrada = linha.split(";");
 			
-			boolean fornecedorExterno = Boolean.getBoolean(linhaQuebrada[3]);
+			boolean fornecedorExterno = Boolean.parseBoolean(linhaQuebrada[3]);
+			
 			
 			if(fornecedorExterno){
 				

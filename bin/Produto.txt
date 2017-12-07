@@ -1,2 +1,3 @@
 1;Ferro;FerroDePassarRoupas;false;
-2;Camisa branca;Uma camisa branca comum.;true;2;
+2;Camisa branca;Uma camisa branca comum.;false;
+3;Dildo;Produto para Shemale;true;1;
